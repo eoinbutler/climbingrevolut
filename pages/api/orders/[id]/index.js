@@ -9,6 +9,7 @@ async function handleGetOrder(req, res) {
       token: order.payment.public_id,
       cart: order.cart,
       total: order.total,
+      public_id: order.public_id,
       isCompleted: order.isCompleted
     });
   } catch (error) {

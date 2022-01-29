@@ -5,7 +5,7 @@ async function handleFinishOrder(req, res) {
   try {
     const order = await orders.get(req.query.id);
     const response = await fetch(
-      `https://sandbox-merchant.revolut.com/api/1.0/orders`,
+      `https://merchant.revolut.com/api/1.0/orders`,
       {
         method: "POST",
         headers: {

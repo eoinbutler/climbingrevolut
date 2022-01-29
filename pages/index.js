@@ -6,18 +6,21 @@ function PaymentSelectPage({ order }) {
   useEffect(() => {
     if (!order) return;
 
-    RevolutCheckout(order.token, "sandbox").then(function (instance) {
-      instance.revolutPay({
-        target: document.getElementById("revolut-pay"),
-        //phone: "+441632960022", // recommended
-        onSuccess() {
-          console.log("Payment completed");
-        },
-        onError(error) {
-          console.error("Payment failed: " + error.message);
-        }
+    if (false) {
+      RevolutCheckout(order.token).then(function (instance) {
+        instance.revolutPay({
+          target: document.getElementById("revolut-pay"),
+          //phone: "+441632960022", // recommended
+          onSuccess() {
+            console.log("Payment completed");
+          },
+          onError(error) {
+            console.error("Payment failed: " + error.message);
+            console.error("Order ID: " + order.token);
+          }
+        });
       });
-    });
+    }
   }, [order]);
 
   const sum = (order.total.amount / 100).toLocaleString("en", {
@@ -40,6 +43,7 @@ function PaymentSelectPage({ order }) {
     <>
       <h2>Checkout ({sum})</h2>
       <h4>{order.id}</h4>
+
       <a href={dest_link}>
         <button
           style={{

@@ -29,12 +29,12 @@ async function handleCreateOrder(req, res) {
 
     const payload = {
       capture_mode: `AUTOMATIC` /** Manually confirm payment in the merchant dashboard */,
-      // settlement_currency: `USD` /** Automatically exchange payment to desired currency */,
+      settlement_currency: `EUR` /** Automatically exchange payment to desired currency */,
       ...total
     };
 
     const response = await fetch(
-      `https://sandbox-merchant.revolut.com/api/1.0/orders`,
+      `https://merchant.revolut.com/api/1.0/orders`,
       {
         method: "POST",
         headers: {
@@ -59,10 +59,13 @@ async function handleCreateOrder(req, res) {
 
     res.json({
       id: order.id,
+      id2: order.id,
+      public_id: order.public_id,
       token: payment.public_id,
       cart,
       total
     });
+    console.log(response.status);
   } catch (error) {
     console.error(error);
     res.json({
