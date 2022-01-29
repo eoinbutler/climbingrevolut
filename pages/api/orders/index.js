@@ -22,13 +22,13 @@ function calculateTotal(cart) {
 async function handleCreateOrder(req, res) {
   try {
     const goodsList = await goods.bulkGet({
-      docs: req.body.cart.map(id => ({ id }))
+      docs: req.body.cart.map((id) => ({ id }))
     });
-    const cart = goodsList.results.map(item => item.docs[0].ok);
+    const cart = goodsList.results.map((item) => item.docs[0].ok);
     const total = calculateTotal(cart);
 
     const payload = {
-      capture_mode: `MANUAL` /** Manually confirm payment in the merchant dashboard */,
+      capture_mode: `AUTOMATIC` /** Manually confirm payment in the merchant dashboard */,
       // settlement_currency: `USD` /** Automatically exchange payment to desired currency */,
       ...total
     };
