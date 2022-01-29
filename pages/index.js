@@ -1,10 +1,23 @@
 import { useRef, useEffect, useState } from "react";
 import fetch from "isomorphic-fetch";
+import RevolutCheckout from "@revolut/checkout";
 
 function PaymentSelectPage({ order }) {
   useEffect(() => {
-    console.log("useEffect");
     if (!order) return;
+
+    RevolutCheckout(order.token, "sandbox").then(function (instance) {
+      instance.revolutPay({
+        target: document.getElementById("revolut-pay"),
+        //phone: "+441632960022", // recommended
+        onSuccess() {
+          console.log("Payment completed");
+        },
+        onError(error) {
+          console.error("Payment failed: " + error.message);
+        }
+      });
+    });
   }, [order]);
 
   const sum = (order.total.amount / 100).toLocaleString("en", {
@@ -38,6 +51,8 @@ function PaymentSelectPage({ order }) {
           Pay with Card
         </button>
       </a>
+
+      <div id="revolut-pay"></div>
 
       <style jsx>{`
         .form-card-form {
