@@ -23,10 +23,7 @@ function PaymentSelectPage({ order }) {
     }
   }, [order]);
 
-  const sum = (order.total.amount / 100).toLocaleString("en", {
-    style: "currency",
-    currency: order.total.currency
-  });
+  console.log(process.env.REVOLUT_API_KEY)
 
   if (order === null) {
     return (
@@ -36,6 +33,11 @@ function PaymentSelectPage({ order }) {
       </>
     );
   }
+
+  const sum = (order.total.amount / 100).toLocaleString("en", {
+    style: "currency",
+    currency: order.total.currency
+  });
 
   let dest_link = `checkout?order=${order.id}`;
 
