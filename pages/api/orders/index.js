@@ -34,7 +34,7 @@ async function handleCreateOrder(req, res) {
     };
 
     const response = await fetch(
-      `https://sandbox-merchant.revolut.com/api/1.0/orders`,
+      `https://merchant.revolut.com/api/1.0/orders`,
       {
         method: "POST",
         headers: {
