@@ -34,16 +34,18 @@ async function handleCreateOrder(req, res) {
     };
 
     const response = await fetch(
-      `https://merchant.revolut.com/api/1.0/orders`,
+      `https://sandbox-merchant.revolut.com/api/1.0/orders`,
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.REVOLUT_API_KEY}`,
+          Authorization: `Bearer ${process.env.REACT_APP_REVOLUT_API_KEY}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(payload)
       }
     );
+
+    console.log(`Bearer ${process.env.REVOLUT_API_KEY}`);
 
     res.status(response.status);
 

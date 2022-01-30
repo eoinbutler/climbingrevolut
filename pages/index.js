@@ -23,8 +23,6 @@ function PaymentSelectPage({ order }) {
     }
   }, [order]);
 
-  console.log(process.env.REVOLUT_API_KEY)
-
   if (order === null) {
     return (
       <>
@@ -44,7 +42,7 @@ function PaymentSelectPage({ order }) {
   return (
     <>
       <h2>Checkout ({sum})</h2>
-      <h4>{order.id}</h4>
+      <h5>{order.id}</h5>
 
       <a href={dest_link}>
         <button
