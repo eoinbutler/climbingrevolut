@@ -27,7 +27,7 @@ function PaymentSelectPage({ order }) {
     return (
       <>
         <h2>Checkout</h2>
-        <h3>Order not found</h3>
+        <h3>Couldn't create order</h3>
       </>
     );
   }
