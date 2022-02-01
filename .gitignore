@@ -175,3 +175,5 @@ $RECYCLE.BIN/
 
 # https://zeit.co/home
 .now
+
+yarn.lock
