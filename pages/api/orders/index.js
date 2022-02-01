@@ -45,8 +45,6 @@ async function handleCreateOrder(req, res) {
       }
     );
 
-    console.log(`Bearer ${process.env.REVOLUT_API_KEY}`);
-
     res.status(response.status);
 
     const payment = await response.json();
