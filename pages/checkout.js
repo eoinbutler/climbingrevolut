@@ -12,7 +12,10 @@ function CheckoutPage({ order }) {
   useEffect(() => {
     if (!order) return;
 
-    RevolutCheckout(order.token, "prod").then((RC) => {
+    RevolutCheckout(
+      order.token,
+      process.env.REACT_APP_MODE === "prod" ? "prod" : "sandbox"
+    ).then((RC) => {
       rcRef.current = RC.createCardField({
         target: cardElementRef.current,
         hidePostcodeField: true,

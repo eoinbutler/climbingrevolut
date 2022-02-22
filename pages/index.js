@@ -5,22 +5,6 @@ import RevolutCheckout from "@revolut/checkout";
 function PaymentSelectPage({ order }) {
   useEffect(() => {
     if (!order) return;
-
-    if (false) {
-      RevolutCheckout(order.token).then(function (instance) {
-        instance.revolutPay({
-          target: document.getElementById("revolut-pay"),
-          //phone: "+441632960022", // recommended
-          onSuccess() {
-            console.log("Payment completed");
-          },
-          onError(error) {
-            console.error("Payment failed: " + error.message);
-            console.error("Order ID: " + order.token);
-          }
-        });
-      });
-    }
   }, [order]);
 
   if (order === null) {
@@ -42,8 +26,10 @@ function PaymentSelectPage({ order }) {
   return (
     <>
       <h2>Checkout ({sum})</h2>
+      <h4 style={{ color: "red" }}>
+        {process.env.REACT_APP_MODE === "prod" ? "" : "SANDBOX MODE"}
+      </h4>
       <h5>{order.id}</h5>
-
       <a href={dest_link}>
         <button
           style={{
@@ -55,9 +41,7 @@ function PaymentSelectPage({ order }) {
           Pay with Card
         </button>
       </a>
-
       <div id="revolut-pay"></div>
-
       <style jsx>{`
         .form-card-form {
           display: none;

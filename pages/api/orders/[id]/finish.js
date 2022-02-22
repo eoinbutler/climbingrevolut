@@ -5,10 +5,15 @@ async function handleFinishOrder(req, res) {
   try {
     const order = await orders.get(req.query.id);
     const response = await fetch(
-      `https://merchant.revolut.com/api/1.0/orders/${order.payment.id}`,
+      process.env.REACT_APP_MODE === "prod"
+        ? `https://merchant.revolut.com/api/1.0/orders/${order.payment.id}`
+        : `https://sandbox-merchant.revolut.com/api/1.0/orders/${order.payment.id}`,
       {
         headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_REVOLUT_API_KEY}`
+          Authorization:
+            process.env.REACT_APP_MODE === "prod"
+              ? `Bearer ${process.env.REACT_APP_REVOLUT_API_KEY_PROD}`
+              : `Bearer ${process.env.REACT_APP_REVOLUT_API_KEY_SANDBOX}`
         }
       }
     );
